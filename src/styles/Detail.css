@@ -1,0 +1,199 @@
+.detail-page {
+  min-height: calc(100vh - 65px);
+  padding: 2rem 1rem;
+}
+
+.detail-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.detail-card {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  overflow: hidden;
+  margin-top: 1rem;
+  box-shadow: 0 0 80px rgba(148,93,255,0.1);
+}
+
+.detail-hero {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(148,93,255,0.05);
+}
+
+.detail-emoji { font-size: 68px; line-height: 1; }
+
+.detail-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: white;
+}
+
+.detail-price {
+  font-family: 'Outfit', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #945dff, #00d4ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+.detail-section {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.detail-section:last-child { border-bottom: none; }
+
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 10px;
+}
+
+.spec-item {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  transition: border-color 0.2s;
+}
+
+.spec-item:hover { border-color: rgba(148,93,255,0.3); }
+
+.spec-key {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.spec-val {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.why-box {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: rgba(0,229,160,0.06);
+  border: 1px solid rgba(0,229,160,0.2);
+  border-radius: 16px;
+  padding: 16px 18px;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.why-icon {
+  color: var(--green);
+  font-size: 18px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.tradeoff-box {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: rgba(255,179,71,0.06);
+  border: 1px solid rgba(255,179,71,0.2);
+  border-radius: 16px;
+  padding: 16px 18px;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.tradeoff-icon {
+  color: var(--amber);
+  font-size: 18px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.buy-links { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.buy-btn {
+  padding: 11px 22px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text);
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.2s;
+  backdrop-filter: blur(10px);
+}
+
+.buy-btn:hover {
+  border-color: rgba(148,93,255,0.5);
+  color: var(--accent);
+  box-shadow: 0 0 20px rgba(148,93,255,0.2);
+}
+
+.detail-actions {
+  display: flex;
+  gap: 10px;
+  padding: 1.5rem 2rem;
+  background: rgba(0,0,0,0.2);
+  flex-wrap: wrap;
+}
+
+.compare-toggle {
+  padding: 12px 24px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--muted);
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.compare-toggle.active {
+  background: rgba(148,93,255,0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.compare-toggle:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.go-compare {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #945dff, #00d4ff);
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  box-shadow: 0 0 24px rgba(148,93,255,0.4);
+}
+
+.go-compare:hover { opacity: 0.85; }
