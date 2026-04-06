@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import '../styles/Results.css'
 
-export default function Results({ results, compareList, toggleCompare, setSelectedItem, setView, budget, setBudget }) {
+export default function Results({ results, compareList, toggleCompare, setSelectedItem, setView, budget, setBudget, startNewSearch }) {
   const [sort, setSort] = useState('match')
 
   const sorted = [...results].sort((a, b) => {
@@ -31,8 +31,9 @@ export default function Results({ results, compareList, toggleCompare, setSelect
               <option value="price_asc">Price: low to high</option>
               <option value="price_desc">Price: high to low</option>
             </select>
-            <button className="back-btn" onClick={() => setView('chat')}>← New search</button>
+            <button className="back-btn" onClick={startNewSearch}>← New search</button>
           </div>
+
         </div>
 
         {compareList.length >= 2 && (

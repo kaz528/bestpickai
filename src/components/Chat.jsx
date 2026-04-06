@@ -50,11 +50,11 @@ export default function Chat({ device, budget, setBudget, setResults, setView })
 
   const generateResults = async (ans) => {
     const ranges = {
-      'Under $300': [0, 300],
-      '$300 – $500': [300, 500],
-      '$500 – $800': [500, 800],
-      '$800 – $1200': [800, 1200],
-      '$1200+': [1200, 99999]
+      '$0 – $300': [0, 300],
+      '$0 – $500': [0, 500],
+      '$0 – $800': [0, 800],
+      '$0 – $1200': [0, 1200],
+      '$0 – $1500+': [0, 99999]
     }
     const [min, max] = ranges[budget] || [0, 99999]
     const pool = DEVICES[device]
@@ -111,7 +111,7 @@ export default function Chat({ device, budget, setBudget, setResults, setView })
         <div className="budget-bar">
           <span className="budget-label">Budget</span>
           <div className="budget-ranges">
-            {['Under $300','$300 – $500','$500 – $800','$800 – $1200','$1200+'].map(r => (
+            {['$0 – $300','$0 – $500','$0 – $800','$0 – $1200','$0 – $1500+'].map(r => (
               <button
                 key={r}
                 className={`range-btn ${budget === r ? 'active' : ''}`}

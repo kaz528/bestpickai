@@ -13,8 +13,7 @@ function App() {
   const [view, setView] = useState('chat')
   const [selectedItem, setSelectedItem] = useState(null)
   const [compareList, setCompareList] = useState([])
-  const [budget, setBudget] = useState('$500 – $800')
-
+  const [budget, setBudget] = useState('$0 – $800')
   const toggleCompare = (item) => {
     setCompareList(prev =>
       prev.find(i => i.id === item.id)
@@ -23,14 +22,20 @@ function App() {
     )
   }
 
+  const startNewSearch = () => {
+    setCompareList([])
+    setResults([])
+    setSelectedItem(null)
+    setView('chat')
+  }
+
   if (page === 'landing') {
     return <Landing onStart={() => setPage('app')} />
   }
 
   return (
     <div className="app-wrap">
-      <Header device={device} setDevice={(d) => { setDevice(d); setView('chat') }} onHome={() => setPage('landing')} />
-
+      <Header device={device} setDevice={(d) => { setDevice(d); setCompareList([]); setResults([]); setView('chat') }} onHome={() => setPage('landing')} />
       {view === 'chat' && (
         <Chat
           device={device}
@@ -50,6 +55,7 @@ function App() {
           setView={setView}
           budget={budget}
           setBudget={setBudget}
+          startNewSearch={startNewSearch}
         />
       )}
 
