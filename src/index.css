@@ -49,3 +49,41 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+@media (max-width: 600px) {
+  .header-inner {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0.75rem 1rem;
+  }
+  .tagline { display: none; }
+  .device-tabs { order: 3; width: 100%; }
+  .tab { flex: 1; text-align: center; padding: 8px 10px; }
+  .chat-container { border-radius: 16px; }
+  .budget-bar { flex-wrap: wrap; gap: 8px; }
+  .budget-label { width: 100%; }
+  .budget-ranges { width: 100%; }
+  .range-btn { font-size: 11px; padding: 5px 8px; }
+  .cards-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .card-top { padding: 1rem 1rem 0.5rem; }
+  .card-body { padding: 0.5rem 1rem 0.5rem; }
+  .card-footer { padding: 0.5rem 1rem 1rem; flex-direction: column; }
+  .detail-hero { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.25rem; }
+  .detail-emoji { font-size: 48px; }
+  .detail-section { padding: 1rem 1.25rem; }
+  .specs-grid { grid-template-columns: 1fr 1fr; }
+  .compare-heroes { grid-template-columns: 1fr; }
+  .results-top { flex-direction: column; }
+  .results-controls { width: 100%; justify-content: space-between; }
+  .landing-title { font-size: 36px; }
+  .landing-features { gap: 6px; }
+  .feature-pill { font-size: 12px; padding: 6px 12px; }
+  .start-btn { padding: 14px 28px; font-size: 15px; }
+  .detail-actions { padding: 1rem 1.25rem; }
+  .compare-table th, .compare-table td { padding: 10px 12px; font-size: 12px; }
+}
+
+@media (max-width: 400px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .range-btn { font-size: 10px; padding: 4px 6px; }
+}

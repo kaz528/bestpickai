@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import '../styles/Results.css'
+import { useState } from 'react'
+import supabase from '../supabase'
 
 export default function Results({ results, compareList, toggleCompare, setSelectedItem, setView, budget, setBudget, startNewSearch }) {
   const [sort, setSort] = useState('match')
@@ -81,14 +83,77 @@ export default function Results({ results, compareList, toggleCompare, setSelect
           ))}
         </div>
 
-        <div className="feedback-wrap">
-          <p className="feedback-title">Were these suggestions accurate?</p>
-          <div className="feedback-btns">
-            <button onClick={() => alert('Thanks for the feedback! 👍')}>👍 Yes, great!</button>
-            <button onClick={() => alert('Sorry about that! We\'ll improve 🙏')}>👎 Not really</button>
-          </div>
-        </div>
+        <FeedbackSection device={results[0]?.name} />
       </div>
+    </div>
+  )
+}
+
+function FeedbackSection({ device }) {
+  const [thumb, setThumb] = useState(null)
+  const [comment, setComment] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+
+  const submit = async () => {
+    await supabase.from('feedback').insert({
+      thumb,
+      comment,
+      device_type: device
+    })
+    setSubmitted(true)
+  }
+
+  if (submitted) return (
+    <div className="feedback-wrap">
+      <p style={{color:'var(--green)', fontSize:'14px'}}>
+        ✓ Thanks for your feedback! It helps us improve.
+      </p>
+    </div>
+  )
+
+  return (
+    <div className="feedback-wrap">
+      <p className="feedback-title">Were these suggestions accurate?</p>
+      <div className="feedback-btns">
+        <button
+          onClick={() => setThumb('up')}
+          style={{borderColor: thumb === 'up' ? 'var(--green)' : ''}}
+        >
+          👍 Yes, great!
+        </button>
+        <button
+          onClick={() => setThumb('down')}
+          style={{borderColor: thumb === 'down' ? '#ff6584' : ''}}
+        >
+          👎 Not really
+        </button>
+      </div>
+      {thumb && (
+        <>
+          <textarea
+            style={{
+              width:'100%', marginTop:'12px', padding:'10px 12px',
+              background:'rgba(255,255,255,0.05)', border:'1px solid var(--border)',
+              borderRadius:'12px', color:'var(--text)', fontFamily:'inherit',
+              fontSize:'13px', resize:'vertical', minHeight:'70px'
+            }}
+            placeholder="Optional: what was wrong or missing?"
+            value={comment}
+            onChange={e => setComment(e.target.value)}
+          />
+          <button
+            onClick={submit}
+            style={{
+              marginTop:'8px', padding:'9px 24px',
+              background:'linear-gradient(135deg, #945dff, #00d4ff)',
+              border:'none', borderRadius:'12px', color:'white',
+              fontSize:'13px', fontFamily:'inherit', cursor:'pointer'
+            }}
+          >
+            Submit feedback
+          </button>
+        </>
+      )}
     </div>
   )
 }

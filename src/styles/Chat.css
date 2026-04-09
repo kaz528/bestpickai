@@ -217,3 +217,16 @@
   color: var(--text);
   border-color: rgba(148,93,255,0.3);
 }
+
+.generating-msg {
+  text-align: center;
+  padding: 2rem;
+  font-size: 14px;
+  color: var(--muted);
+  animation: pulse 1.5s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}

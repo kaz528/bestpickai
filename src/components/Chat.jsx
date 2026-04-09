@@ -57,20 +57,22 @@ export default function Chat({ device, budget, setBudget, setResults, setView })
       '$0 – $1500+': [0, 99999]
     }
     const [min, max] = ranges[budget] || [0, 99999]
-    const pool = DEVICES[device]
+    const pool = DEVICES[device].filter(d => d.price >= min && d.price <= max + 150)
+    const fallbackPool = pool.length >= 3 ? pool : DEVICES[device].slice(0, 8)
+    const finalPool = pool.length >= 3 ? pool : fallbackPool
 
     try {
-      const aiResults = await getAIRecommendations(device, ans, budget, pool)
+      const aiResults = await getAIRecommendations(device, ans, budget, finalPool)
       const scored = aiResults
         .map(r => {
-          const found = pool.find(d => d.id === r.id)
+          const found = finalPool.find(d => d.id === r.id)
           return found ? { ...found, match: r.match } : null
         })
         .filter(Boolean)
 
       let final = scored
       if (final.length < 3) {
-        const extras = pool
+        const extras = finalPool
           .filter(d => !final.find(f => f.id === d.id))
           .slice(0, 3 - final.length)
         final = [...final, ...extras]
@@ -79,8 +81,8 @@ export default function Chat({ device, budget, setBudget, setResults, setView })
       setResults(final)
     } catch (err) {
       console.error('Gemini error:', err)
-      let fallback = pool.filter(d => d.price >= min && d.price <= max)
-      if (fallback.length < 3) fallback = pool.slice(0, 3)
+      let fallback = finalPool.filter(d => d.price >= min && d.price <= max)
+      if (fallback.length < 3) fallback = finalPool.slice(0, 3)
       setResults(fallback.slice(0, 6))
     }
 
@@ -99,14 +101,18 @@ export default function Chat({ device, budget, setBudget, setResults, setView })
             </div>
           ))}
           {loading && (
-            <div className="bubble ai">
-              <div className="ai-avatar">◈</div>
-              <div className="bubble-text typing-dots">
-                <span/><span/><span/>
-              </div>
-            </div>
-          )}
-        </div>
+  <div className="bubble ai">
+    <div className="ai-avatar">◈</div>
+    <div className="bubble-text typing-dots">
+      <span/><span/><span/>
+    </div>
+  </div>
+)}
+{done && loading && (
+  <div className="generating-msg">
+    ✨ AI is analyzing your needs and finding the best matches...
+  </div>
+)}
 
         <div className="budget-bar">
           <span className="budget-label">Budget</span>
@@ -135,6 +141,7 @@ export default function Chat({ device, budget, setBudget, setResults, setView })
           <button className="send-btn" onClick={send} disabled={done || loading}>
             ↑
           </button>
+        </div>
         </div>
       </div>
     </div>
